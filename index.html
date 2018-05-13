@@ -11,6 +11,7 @@
     <button id="button">点击按钮</button>
     <p>响应随机</p>
     <script>
+        var button= doucment.getElementById('button')
         button.addEventListener('click', (e)=>{
             let script = document.createElement('script')
             let functionName = 'frank'+ parseInt(Math.random()*10000000 ,10)

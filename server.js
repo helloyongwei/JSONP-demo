@@ -21,8 +21,14 @@ var server = http.createServer(function(request, response){
 
   console.log('含查询字符串的路径\n' + pathWithQuery)
 
-  if(path === '/frank'){
-    fs.writeFileSync('./index.html', 'utf8')
+  if(path === '/'){
+    let page = fs.readFileSync('./index.html', 'utf8')
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/html;charset=utf-8')
+    let callback = query.callback
+    response.write(page)
+    response.end()
+  }else if (path === '/frank') {
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     let callback = query.callback
@@ -30,7 +36,7 @@ var server = http.createServer(function(request, response){
         ${callback}.call(undefined, '我访问成功了')
     `)
     response.end()
-  }else{
+  } else {
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     let callback = query.callback
