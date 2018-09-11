@@ -25,20 +25,21 @@ var server = http.createServer(function(request, response){
     let page = fs.readFileSync('./index.html', 'utf8')
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    let callback = query.callback
     response.write(page)
     response.end()
   }else if (path === '/frank') {
     response.statusCode = 200
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
+    response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
     let callback = query.callback
+	  console.log('/frank')
+	  console.log(callback)
     response.write(`
         ${callback}.call(undefined, '我访问成功了')
     `)
     response.end()
   } else {
     response.statusCode = 404
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
+    response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
     let callback = query.callback
     response.write(`
         ${callback}.call(undefined, '我访问失败了')

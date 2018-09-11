@@ -11,14 +11,14 @@
     <button id="button">点击按钮</button>
     <p>响应随机</p>
     <script>
-        var button= doucment.getElementById('button')
+        var button= document.getElementById('button')
         button.addEventListener('click', (e)=>{
             let script = document.createElement('script')
             let functionName = 'frank'+ parseInt(Math.random()*10000000 ,10)
             window[functionName] = function(e){  // 每次请求之前搞出一个随机的函数
-                console.log(e.data)
+                console.log(e)
             }
-            script.src = '/frank?callback=' + functionName
+            script.src = 'http://jack.com:8001/frank?callback=' + functionName
             document.body.appendChild(script)
             script.onload = function(e){ // 状态码是 200~299 则表示成功
                 e.currentTarget.remove()
